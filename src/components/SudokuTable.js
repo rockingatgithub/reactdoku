@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Button, Table, Dropdown, DropdownButton } from "react-bootstrap";
+import {
+  Button,
+  Table,
+  Dropdown,
+  DropdownButton,
+  Col,
+  Row,
+} from "react-bootstrap";
 
 class SudokuTable extends Component {
   constructor(props) {
@@ -83,56 +90,67 @@ class SudokuTable extends Component {
   render() {
     return (
       <React.Fragment>
-        <DropdownButton id="dropdown-basic-button" title="Choose Theme">
-          <Dropdown.Item href="#" onClick={this.changeTheme1}>
-            Red Sunset
-          </Dropdown.Item>
-          <Dropdown.Item href="#" onClick={this.changeTheme2}>
-            Dusk
-          </Dropdown.Item>
-          <Dropdown.Item href="#" onClick={this.changeTheme3}>
-            Misty Meadow
-          </Dropdown.Item>
-        </DropdownButton>
-        <Table
-          striped
-          bordered
-          hover
-          responsive
-          style={{ background: this.state.theme }}
-        >
-          <tbody>
-            {this.state.questionGrid.map((row, index, arr) => (
-              <tr key={index}>
-                {row.map((val, ind, array) => (
-                  <td key={ind}>
-                    {val === 0 ? (
-                      <input
-                        type="number"
-                        id={`cellcount-${index}-${ind}`}
-                        style={{ border: "1px solid #df9bde" }}
-                        onChange={this.handleChange}
-                        min={1}
-                        max={9}
-                        ref={this.inputBox}
-                      />
-                    ) : (
-                      <input
-                        type="number"
-                        value={val}
-                        id={`cellcount-${index}-${ind}`}
-                        style={{ border: "1px solid bisque" }}
-                        ref={this.inputBox}
-                        readOnly
-                      />
-                    )}
-                  </td>
+        <Row style={{ marginTop: "10px" }}>
+          <Col lg={2}>
+            <DropdownButton id="dropdown-basic-button" title="Choose Theme">
+              <Dropdown.Item href="#" onClick={this.changeTheme1}>
+                Red Sunset
+              </Dropdown.Item>
+              <Dropdown.Item href="#" onClick={this.changeTheme2}>
+                Dusk
+              </Dropdown.Item>
+              <Dropdown.Item href="#" onClick={this.changeTheme3}>
+                Misty Meadow
+              </Dropdown.Item>
+            </DropdownButton>
+          </Col>
+          <Col lg={1}>
+            <Button onClick={this.checkGrid}> Finish</Button>
+          </Col>
+          <Col lg={9}></Col>
+        </Row>
+        <Row>
+          <Col></Col>
+          <Col>
+            <Table
+              striped
+              bordered
+              hover
+              responsive
+              style={{ background: this.state.theme }}
+            >
+              <tbody>
+                {this.state.questionGrid.map((row, index, arr) => (
+                  <tr key={index}>
+                    {row.map((val, ind, array) => (
+                      <td key={ind}>
+                        {val === 0 ? (
+                          <input
+                            type="number"
+                            id={`cellcount-${index}-${ind}`}
+                            style={{ border: "1px solid #df9bde" }}
+                            onChange={this.handleChange}
+                            min={1}
+                            max={9}
+                          />
+                        ) : (
+                          <input
+                            type="number"
+                            value={val}
+                            id={`cellcount-${index}-${ind}`}
+                            style={{ border: "1px solid bisque" }}
+                            readOnly
+                          />
+                        )}
+                      </td>
+                    ))}
+                  </tr>
                 ))}
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-        <Button onClick={this.checkGrid}> Finish</Button>
+              </tbody>
+            </Table>
+          </Col>
+          <Col></Col>
+        </Row>
       </React.Fragment>
     );
   }

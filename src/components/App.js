@@ -114,16 +114,16 @@ class App extends Component {
 
   render() {
     return (
-      <Container>
+      <Container fluid>
         <Row>
-          <Col>
+          <Col id="head-col">
             <Navbar bg="light" expand="lg">
               <Navbar.Brand href="#home">React-Sudoku</Navbar.Brand>
             </Navbar>
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col lg={2}>
             <DropdownButton id="dropdown-basic-button" title="Select Level">
               <Dropdown.Item href="#" onClick={this.handleEasy}>
                 Easy
@@ -135,21 +135,21 @@ class App extends Component {
                 Hard
               </Dropdown.Item>
             </DropdownButton>
-
+          </Col>
+          <Col lg={2}>
             <span>Timer: {ms(this.state.time)}</span>
-
+          </Col>
+          <Col lg={1}>
             <Button onClick={this.startGame}>Start</Button>
           </Col>
+          <Col lg={7}></Col>
         </Row>
-        <Row>
-          <Col>
-            <SudokuTable
-              questionGrid={this.state.questionGrid}
-              answerGrid={this.state.answerGrid}
-              stopTimer={this.stopGame}
-            />
-          </Col>
-        </Row>
+
+        <SudokuTable
+          questionGrid={this.state.questionGrid}
+          answerGrid={this.state.answerGrid}
+          stopTimer={this.stopGame}
+        />
       </Container>
     );
   }
